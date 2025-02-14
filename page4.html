@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мы?</title>
+    <style>
+        /* Общие стили */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #ffcccc; /* Светло-красный фон */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный белый фон для контейнера */
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            color: #ff4d4d;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            background-color: #ff4d4d;
+            color: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ff1a1a;
+        }
+
+        .next-button {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        /* Анимация сердечек */
+        @keyframes fall {
+            0% { top: -10%; }
+            100% { top: 110%; }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .heart {
+            position: absolute;
+            top: -10%;
+            font-size: 20px;
+            color: #ff4d4d;
+            animation: fall 5s linear infinite, spin 4s linear infinite;
+            z-index: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Мы?</h1>
+        <button id="photoButton">Показать фото</button>
+        <img id="photo" src="" alt="милашки" style="display:none; max-width:100%; margin-top:20px;">
+    </div>
+
+    <!-- Анимация сердечек -->
+    <script>
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(createHeart, 300);
+
+        // Логика для фотографий
+        let photos = ["photo_1_2025-02-14_15-19-41.jpg", "photo_2_2025-02-14_15-19-41.jpg", "photo_3_2025-02-14_15-19-41.jpg", "photo_4_2025-02-14_15-19-41.jpg", "photo_5_2025-02-14_15-19-41.jpg
+"]; // Замените на ваши фото
+        let currentPhotoIndex = 0;
+
+        document.getElementById('photoButton').addEventListener('click', function() {
+            let photo = document.getElementById('photo');
+            photo.src = photos[currentPhotoIndex];
+            photo.style.display = 'block';
+            currentPhotoIndex = (currentPhotoIndex + 1) % photos.length;
+        });
+    </script>
+</body>
+</html>
